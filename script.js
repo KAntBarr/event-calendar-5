@@ -9,7 +9,9 @@ $(document).ready(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   //
-
+  $('div[class*="row"]').on("click", "button", function(){
+    console.log(this.parentNode.children[1].value);
+  })
 
 
   // TODO: Add code to apply the past, present, or future class to each time
