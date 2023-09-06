@@ -18,7 +18,28 @@ $(document).ready(function () {
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
   //
+  function setClasses() {
+    const time = dayjs().format("HH");
+    for(let i=9; i<18; i++) {
+      let id = "#hour-" + i;
+      // console.log(i, time);
+      if(time > i) {
+        $(id).removeClass("future");
+        $(id).removeClass("present");
+        $(id).addClass("past");
+      } else if(time == i) {
+        $(id).removeClass("future");
+        $(id).addClass("present");
+        $(id).removeClass("past");
+      } else {
+        $(id).addClass("future");
+        $(id).removeClass("present");
+        $(id).removeClass("past");
+      };
+    }
+  }
 
+  const classInterval = setInterval(setClasses, 30000);
 
 
   // TODO: Add code to get any user input that was saved in localStorage and set
@@ -29,8 +50,12 @@ $(document).ready(function () {
 
 
   // TODO: Add code to display the current date in the header of the page.
-  const dateInterval = setInterval( function() {
+  function setDate() {
     $("#currentDay").text(dayjs().format("ddd:MMM:YYYY HH:mm:ss"));
-  }, 1000);
+  }
+  
+  const dateInterval = setInterval( setDate, 1000);
   // console.log(dayjs().format("ddd:MMM:YYYY"));
+  setDate();
+  setClasses();
 });
