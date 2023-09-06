@@ -2,7 +2,7 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(document).ready(function () {
-  const hourBlocks = {
+  let hourBlocks = {
     "hour-9": '',
     "hour-10": '',
     "hour-11": '',
@@ -65,7 +65,10 @@ $(document).ready(function () {
   // attribute of each time-block be used to do this?
   //
   function loadEvents() {
-
+    hourBlocks = JSON.parse(localStorage.getItem("hourBlocks"));
+    for(const hour in hourBlocks){
+      $('#'+hour).children()[1].value = hourBlocks[hour];
+    }
   }
 
 
@@ -78,4 +81,5 @@ $(document).ready(function () {
   // console.log(dayjs().format("ddd:MMM:YYYY"));
   setDate();
   setClasses();
+  loadEvents();
 });
