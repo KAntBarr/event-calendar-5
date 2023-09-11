@@ -77,8 +77,15 @@ $(document).ready(function () {
   //
   // get the text events from local storage and load them to the hour row blocks
   function loadEvents() {
-    // load from local storage and save into the global object
-    hourBlocks = JSON.parse(localStorage.getItem("hourBlocks"));
+
+    const emptyStorage = localStorage.getItem("hourBlocks");
+    // make sure local storage is not empty
+    if(emptyStorage!==null && emptyStorage!=='') {
+      // load from local storage and save into the global object
+      hourBlocks = JSON.parse(emptyStorage);
+    } else {
+      console.log("help");
+    }
     // loop through each hour id key in the global object
     for(const hour in hourBlocks){
       // use the current hour id key to set the text stored
